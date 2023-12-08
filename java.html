@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<style>
+  body, html ,h1, h2,h4{
+    height: 100%;
+    font-family: "Inconsolata", sans-serif;
+  }
+  .box, .box1, .box2,.box3,.box4,.box5,.box6{
+    padding: 20px;
+    text-align: center;
+    width: 50%;
+    margin: 60px auto;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px 5px, rgba(0, 0, 0, 0.04) 0px 10px 10px 5px;
+    background-color: #fff
+  }
+  </style> 
+</head>
+
+
+
+<body>
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-wide w3-padding w3-card">
+    <a href="index.html" class="w3-bar-item w3-button"><b>LOGO</b></a>
+    <!-- Float links to the right. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="index.html" class="w3-bar-item w3-button">index</a>
+      <a href="java.html" class="w3-bar-item w3-button">java</a>
+      <a href="api.html" class="w3-bar-item w3-button">api</a>
+    </div>
+  </div>
+</div>
+
+<div class="w3-container w3-padding-32 w3-center" id="API">
+  <h1 class="w3-border-bottom w3-border-light-grey w3-padding-16"><marquee behavior=alternate direction=right scrollamount=4 scrolldelay=40 height=70 style="font-size: 40px; color: white; background-color: black"><center>JAVASCRIPT</center></marquee></h1>
+  </div>
+
+<!-- Page content -->
+
+<div class="box">
+  <h2 style="color: blue;">Calculate Circumference length </h2>
+  <input id="input" type="text" placeholder="Enter radius" fdprocessedid="1pjfaa">
+  <button onclick="calculateAndDisplayCircumference()" class="w3-button w3-purple w3-section" fdprocessedid="kjvwr">Submit</button>
+  <p>Circumference length : <span id="result" style="color: red;"></span></p>
+</div>
+
+<div class="box1">
+  <h2 style="color: blue;">Calculate days per minute</h2>
+  <input type="text" id="daysInput" fdprocessedid="1mel0p" placeholder="Enter day">
+  <p><span id="show2"></span></p>
+  <button onclick="dayToSeconds()" fdprocessedid="lky1nr" class="w3-button w3-yellow w3-section">Submit</button>
+</div>
+
+<div class="box2">
+  <h2 style="color: blue;">Random dice numbers</h2>
+  <button onclick="rollAndDisplayDice()" fdprocessedid="buxkf" class="w3-button w3-green w3-section">click</button>
+  <p id="diceResult"></p>
+</div>
+
+<div class="box3">
+  <h2 style="color: blue;">Check grade </h2>
+  <input type="text" id="scoreInput" placeholder="Enter your score" fdprocessedid="fs6hfm">
+  <button onclick="calculateGrade()" fdprocessedid="ba4nwd" class="w3-button w3-pink w3-section">Submit</button>
+  <p id="result1" style="color: black">Your grade is :</p>
+</div>
+
+<div class="box4">
+  <h2 style="color: blue;">Temperature converter</h2>
+    <input type="number" id="temperatureInput" placeholder="Enter temperature" step="0.1" fdprocessedid="m4gdo" >
+    <button onclick="temperature()" fdprocessedid="5z56" class="w3-button w3-blue w3-section">Submit</button>
+    <p id="temperature">Temperature in Fahrenheit : </p>
+</div>
+
+
+<div class="w3-content w3-padding-100 w3-margin-top w3-center box5"> 
+  <h2>Population of animals in the zoo</h2>
+<canvas id="myChart" style="width:100%;max-width:800px; " ></canvas> 
+</div>
+
+<div class="w3-content w3-padding-100 w3-margin-top w3-center box6">
+  <h2>Country by independence date</h2>
+<canvas id="myChart1" style="width:100%;max-width:800px; " ></canvas>
+</div>
+
+<!-- End page content -->
+</div>
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-16">
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+
+
+<script>
+function calculateAndDisplayCircumference() {
+  let inputElement = document.getElementById("input");
+  let resultElement = document.getElementById("result");
+
+  let radius = parseFloat(inputElement.value);
+
+  if (!isNaN(radius)) {
+    let circumference = calculateCircleCircumference(radius);
+    resultElement.textContent = circumference.toFixed(2);
+  } else {
+    resultElement.textContent = "Please enter a valid value.";
+  }
+} 
+function calculateCircleCircumference(radius) {
+  return 2 * Math.PI * radius;
+}
+function dayToSeconds() {
+    let inputDays = document.getElementById("daysInput").value;
+    if (!isNaN(inputDays)) {
+        let seconds = inputDays * 86400;
+        document.getElementById("show2").innerText = `Number of days : ${inputDays} day, ${seconds} minute`;
+    } else {
+        alert("Please enter a valid number of days.");
+    }
+}
+function rollDice() {
+    const randomNumber = Math.floor(Math.random() * 6) + 1;
+    return randomNumber;
+  }
+
+  function rollAndDisplayDice() {
+    const result = rollDice();
+    document.getElementById("diceResult").innerHTML = `Dice roll results : ${result}`;
+}
+function calculateGrade() {
+            var score = parseFloat(document.getElementById("scoreInput").value);
+            var grade = (score >= 80) ? "A" : (score >= 70) ? "B" : (score >= 60) ? "C" : (score >= 50) ? "D" : "F";
+            document.getElementById("result1").innerHTML = "Your grade is : " + grade;
+}
+
+function temperature() {
+                const temperatureInput = document.getElementById('temperatureInput').value;
+                if (!isNaN(temperatureInput)) {
+                    const temperatureFahrenheit = (temperatureInput * 9 / 5) + 32;
+                    document.getElementById('temperature').innerHTML = `Temperature in Fahrenheit : ${temperatureFahrenheit.toFixed(2)} °F`;
+                } else {
+                    document.getElementById('temperature').innerHTML = 'Please enter the correct temperature.';
+                }
+            }
+        
+    
+</script>
+<script>
+const xValues = ["Bear", "Goat", "	Turtle", "Giraffe", "Alligator "];
+const aValues = [45, 35, 15, 10, 5];
+const barColors1 = [
+  "#00FF66",
+  "#FF99FF",
+  "#FFFF00",
+  "#0033FF",
+  "#FF0000"
+];
+
+new Chart("myChart", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors1,
+      data: aValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+    }
+  }
+});
+</script>
+
+<script >
+  
+  fetch('country-by-independence-date.json')
+    .then(response => response.json())
+    .then(data => {
+      const country = data.map(item => item.country);
+      const independence = data.map(item => item.independence);
+      const ctx = document.getElementById('myChart1');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: country,
+          datasets: [{
+            label: 'country',
+            backgroundColor: "pink",
+            data: independence,
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    });
+ </script>
+
+</body>
+</html>
